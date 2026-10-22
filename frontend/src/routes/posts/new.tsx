@@ -16,12 +16,19 @@ const POST_TYPES = [
   { value: "Angebot", label: "🤝 Ich biete Betreuung an" },
 ] as const;
 
+/// Ein Entwurf kann in der URL stehen (`?title=...&location=...`) und füllt
+/// dann das Formular vor. Veröffentlicht wird trotzdem erst mit dem Knopf.
+/// Ändert sich der Entwurf, wird die Seite neu aufgebaut, weil das Formular
+/// seine Vorgaben nur beim ersten Rendern liest.
 export const Route = createFileRoute("/posts/new")({
   component: NewPostPage,
+  validateSearch: CreatePostSchema.omit({ type: true, author: true }).partial(),
+  remountDeps: ({ search }) => search,
 });
 
 function NewPostPage() {
   const navigate = useNavigate();
+  const draft = Route.useSearch();
 
   const {
     register,
@@ -30,7 +37,7 @@ function NewPostPage() {
     formState: { errors },
   } = useForm({
     resolver: zodResolver(CreatePostSchema),
-    defaultValues: { type: "Gesuch" as const },
+    defaultValues: { type: "Gesuch" as const, ...draft },
   });
 
   // Dieselbe Maske fuellt beide Pinnwaende. Die Richtung entscheidet nur, wie
