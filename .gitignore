@@ -1,0 +1,11 @@
+.DS_Store
+.idea/
+.vscode/
+
+node_modules/
+dist/
+*.tsbuildinfo
+.tanstack/
+
+# Wird von @tanstack/router-plugin erzeugt und ist nicht von Hand zu bearbeiten.
+frontend/src/routeTree.gen.ts

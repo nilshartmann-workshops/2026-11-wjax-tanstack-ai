@@ -1,0 +1,7 @@
+{
+  "name": "huetly",
+  "private": true,
+  "scripts": {
+    "check": "pnpm -r check"
+  }
+}

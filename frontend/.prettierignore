@@ -1,0 +1,12 @@
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+.output/
+.tanstack/
+
+CLAUDE.md
+src/routeTree.gen.ts
+
+public/fonts/
+temp-google-fonts.css
