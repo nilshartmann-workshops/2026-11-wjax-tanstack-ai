@@ -1,6 +1,8 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 
+import { modelName } from "./model.ts";
+
 /// Der Chat-Server von hütly. Hier läuft der Assistent: Er spricht mit dem
 /// Modell und ruft über die Fassade in `huetly-api.ts` den API-Server auf.
 ///
@@ -13,5 +15,7 @@ const app = new Hono();
 const port = 63081;
 
 serve({ fetch: app.fetch, port }, () => {
-  console.log(`hütly Chat-Server läuft auf http://localhost:${port}`);
+  console.log(
+    `hütly Chat-Server läuft auf http://localhost:${port} mit ${modelName}`,
+  );
 });

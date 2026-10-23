@@ -29,7 +29,7 @@ TODO: Aufzählung dessen, was hier zu sehen ist, je Zeile ein Thema mit der Stel
 Du brauchst:
 
 - Node.js 24 und [pnpm](https://pnpm.io)
-- [Ollama](https://ollama.com) mit dem Modell `gemma4:31b-mlx` (`ollama pull gemma4:31b-mlx`)
+- einen API-Schlüssel für Claude von Anthropic, oder [Ollama](https://ollama.com) mit dem Modell `gemma4:31b-mlx` (`ollama pull gemma4:31b-mlx`)
 
 Pakete installieren, einmal im Wurzelverzeichnis:
 
@@ -47,9 +47,31 @@ cd frontend && pnpm dev
 
 Die Anwendung läuft danach auf http://localhost:63000.
 
-Läuft Ollama nicht auf `localhost:11434`, gibst du die Adresse beim Start des Chat-Servers mit: `OLLAMA_BASE_URL=http://... pnpm dev`.
+### Das Modell wählen
 
-Statt Ollama kannst du auch Claude verwenden. Dazu startest du den Chat-Server mit `HUETLY_MODEL=anthropic` und setzt `ANTHROPIC_API_KEY`.
+Der Chat-Server liest beim Start `HUETLY_MODEL`. Groß- und Kleinschreibung ist egal.
+
+| `HUETLY_MODEL` | Modell | braucht |
+|---|---|---|
+| `sonnet` (Standard) | Claude Sonnet 5.5 | `HUETLY_ANTHROPIC_API_KEY` |
+| `haiku` | Claude Haiku 5.5 | `HUETLY_ANTHROPIC_API_KEY` |
+| `gemma` | Gemma 4 über Ollama | ein laufendes Ollama |
+
+```bash
+# Claude Sonnet, der Schlüssel steht in der Umgebung
+export HUETLY_ANTHROPIC_API_KEY=sk-ant-...
+cd server && pnpm dev
+
+# Claude Haiku
+cd server && HUETLY_MODEL=haiku pnpm dev
+
+# Gemma lokal, ohne Konto und ohne Netz
+cd server && HUETLY_MODEL=gemma pnpm dev
+```
+
+Läuft Ollama nicht auf `localhost:11434`, gibst du die Adresse mit: `HUETLY_MODEL=gemma OLLAMA_BASE_URL=http://... pnpm dev`.
+
+Welches Modell läuft, steht in der ersten Zeile, die der Chat-Server ausgibt.
 
 Geprüft wird alles mit `pnpm check` im Wurzelverzeichnis (Formatierung, Linter, TypeScript).
 
