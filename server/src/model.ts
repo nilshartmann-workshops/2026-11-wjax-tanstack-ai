@@ -1,5 +1,8 @@
 import { createAnthropicChat } from "@tanstack/ai-anthropic";
 import { createOllamaChat } from "@tanstack/ai-ollama";
+import { fakeText, type FakeResponseStep } from "@tanstack/ai/testing";
+
+import { answerFromScript } from "./fake-script.ts";
 
 /**
  * Das Modell, mit dem der Assistent spricht. Gewählt wird es beim Start des
@@ -26,10 +29,24 @@ function createChatAdapter() {
         "gemma4:31b-mlx",
         process.env.OLLAMA_BASE_URL ?? "http://localhost:11434",
       );
+    case "fake":
+      return createFakeModel();
   }
   throw new Error(
     `HUETLY_MODEL=${modelName} gibt es nicht. Erlaubt sind sonnet, haiku und gemma.`,
   );
+}
+
+// 🕵️‍♂️ Erzählen: ein Modell nach Drehbuch, ohne Netz und ohne Schlüssel
+function createFakeModel() {
+  const model = fakeText({ tokensPerSecond: 30 });
+  // 🕵️‍♂️ Fallstrick: jede Antwort verbraucht einen Eintrag der Warteschlange, deshalb stellt sich das Drehbuch wieder an
+  const answer: FakeResponseStep = ({ request }) => {
+    model.appendResponses([answer]);
+    return answerFromScript(request.messages);
+  };
+  model.setResponses([answer]);
+  return model;
 }
 
 /**
