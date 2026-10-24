@@ -21,7 +21,16 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
         <span className="chat-panel-title">🐾 hütly-Assistent</span>
         <div className="chat-panel-tools">
           {/* todo: Stopp */}
-          {/* todo: Neues Gespräch */}
+          {chat.messages.length > 0 && (
+            // 🕵️‍♂️ Erzählen: clear() leert das Gespräch und bricht einen laufenden Stream ab
+            <button
+              type="button"
+              className="chat-panel-btn"
+              onClick={chat.clear}
+            >
+              Neues Gespräch
+            </button>
+          )}
           <button type="button" className="chat-panel-btn" onClick={onClose}>
             Schließen
           </button>
