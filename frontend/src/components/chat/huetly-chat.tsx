@@ -1,4 +1,5 @@
 import {
+  angeboteSuchenToolDef,
   type antwortSendenToolDef,
   gesucheSuchenToolDef,
 } from "@huetly/shared/tool-definitions";
@@ -7,6 +8,7 @@ import { fetchServerSentEvents } from "@tanstack/ai-react";
 import { createChatHook } from "@tanstack/ai-react/ui";
 
 import { AssistantMessage } from "#/components/chat/AssistantMessage";
+import { ChatAngebotCard } from "#/components/chat/ChatAngebotCard";
 import { ChatGesuchCard } from "#/components/chat/ChatGesuchCard";
 import { FreigabeCard } from "#/components/chat/FreigabeCard";
 import { UserMessage } from "#/components/chat/UserMessage";
@@ -20,7 +22,7 @@ import Markdown from "#/components/Markdown";
 const chatOptions = {
   connection: fetchServerSentEvents("/api/chat"),
   // 🕵️‍♂️ Erzählen: nur die Definitionen, ausgeführt wird auf dem Server; sie typisieren part.output
-  tools: [gesucheSuchenToolDef],
+  tools: [gesucheSuchenToolDef, angeboteSuchenToolDef],
 };
 
 export const { useAppChat } = createChatHook({
@@ -83,6 +85,15 @@ export const { useAppChat } = createChatHook({
         <div className="chat-cards">
           {part.output?.map((gesuch) => (
             <ChatGesuchCard key={gesuch.id} gesuchId={gesuch.id} />
+          ))}
+        </div>
+      );
+    },
+    angeboteSuchen: ({ part }) => {
+      return (
+        <div className="chat-cards">
+          {part.output?.map((angebot) => (
+            <ChatAngebotCard key={angebot.id} angebotId={angebot.id} />
           ))}
         </div>
       );
