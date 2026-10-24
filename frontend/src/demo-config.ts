@@ -1,7 +1,7 @@
 /** Die Schalter für die Vorführung, alle an einer Stelle. */
 
 /** Zeigt rechts unten den Knopf „Assistent“, der das Chat-Panel öffnet. */
-export const enableAssistant = false;
+export const enableAssistant = true;
 
 /** Zeigt links unten den Knopf der Devtools von TanStack AI. */
 export const enableAiDevTools = false;
