@@ -2,6 +2,7 @@ import {
   angeboteSuchenToolDef,
   type antwortSendenToolDef,
   gesucheSuchenToolDef,
+  gesuchVorbereitenToolDef,
 } from "@huetly/shared/tool-definitions";
 import type { ToolApprovalInterrupt } from "@tanstack/ai-client";
 import { fetchServerSentEvents } from "@tanstack/ai-react";
@@ -13,6 +14,15 @@ import { ChatGesuchCard } from "#/components/chat/ChatGesuchCard";
 import { FreigabeCard } from "#/components/chat/FreigabeCard";
 import { UserMessage } from "#/components/chat/UserMessage";
 import Markdown from "#/components/Markdown";
+import { router } from "#/router";
+
+// 🕵️‍♂️ Zeigen: die Wirkung erscheint in der Anwendung, nicht im Chatfenster
+// 🕵️‍♂️ Fallstrick: kein useNavigate, die Optionen stehen außerhalb jeder Komponente
+const gesuchVorbereitenTool = gesuchVorbereitenToolDef.client((entwurf) => {
+  void router.navigate({ to: "/gesuche/neu", search: entwurf });
+  // 🕵️‍♂️ Erzählen: das Modell erfährt, dass noch nichts veröffentlicht ist
+  return { result: "Formular geöffnet, der Nutzer veröffentlicht selbst" };
+});
 
 /**
  * Alles, was TanStack AI über den Chat von hütly wissen muss: die Verbindung
@@ -22,7 +32,8 @@ import Markdown from "#/components/Markdown";
 const chatOptions = {
   connection: fetchServerSentEvents("/api/chat"),
   // 🕵️‍♂️ Erzählen: nur die Definitionen, ausgeführt wird auf dem Server; sie typisieren part.output
-  tools: [gesucheSuchenToolDef, angeboteSuchenToolDef],
+  // 🕵️‍♂️ Erzählen: ein Client-Tool bringt seine Implementierung mit und läuft hier im Browser
+  tools: [gesucheSuchenToolDef, angeboteSuchenToolDef, gesuchVorbereitenTool],
 };
 
 export const { useAppChat } = createChatHook({
@@ -97,6 +108,13 @@ export const { useAppChat } = createChatHook({
           ))}
         </div>
       );
+    },
+    gesuchVorbereiten: ({ part }) => {
+      if (part.state !== "complete") {
+        return null;
+      }
+
+      return <p className="chat-note">📝 Formular geöffnet</p>;
     },
   },
 });

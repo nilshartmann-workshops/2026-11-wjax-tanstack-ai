@@ -1,3 +1,4 @@
+import { gesuchVorbereitenToolDef } from "@huetly/shared/tool-definitions";
 import { createChatOptions } from "@tanstack/ai";
 
 import { logEvents } from "./log-events.ts";
@@ -18,5 +19,5 @@ export const chatOptions = createChatOptions({
   // 🕵️‍♂️ Zeigen: summary schickt den Denktext mit, sonst kommt er bei Claude leer an
   reasoning: { level: "high", summary: true },
   // 🕵️‍♂️ Erzählen: das Modell fordert ein Tool nur an, chat() führt es aus und dreht die Schleife
-  tools: [gesucheSuchenTool, angeboteSuchenTool],
+  tools: [gesucheSuchenTool, angeboteSuchenTool, gesuchVorbereitenToolDef],
 });
