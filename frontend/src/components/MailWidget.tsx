@@ -7,7 +7,7 @@ export function MailWidget() {
   const [pending, setPending] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email || pending) return;
     setPending(true);

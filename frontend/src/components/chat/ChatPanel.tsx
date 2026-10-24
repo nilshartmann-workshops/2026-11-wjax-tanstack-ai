@@ -1,25 +1,15 @@
-import { useState } from "react";
+import { ChatEingabe } from "#/components/chat/ChatEingabe";
 
 type ChatPanelProps = {
   onClose: () => void;
 };
 
-/// Das Panel des Assistenten: Kopfzeile, Nachrichtenliste und Eingabe.
-///
-/// Es zeigt noch keine Nachrichten und schickt nichts ab. Beides kommt mit
-/// TanStack AI dazu.
+/** Das Panel des Assistenten: Kopfzeile, Nachrichtenliste und Eingabe. */
 export function ChatPanel({ onClose }: ChatPanelProps) {
-  const [draft, setDraft] = useState("");
+  // todo: Chat aus huetly-chat.tsx holen
 
-  function send(event: React.FormEvent) {
-    event.preventDefault();
-    const text = draft.trim();
-    if (text === "") {
-      return;
-    }
-
+  function send(text: string) {
     // todo: Nachricht an den Assistenten schicken
-    setDraft("");
   }
 
   return (
@@ -27,11 +17,15 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
       <header className="chat-panel-header">
         <span className="chat-panel-title">🐾 hütly-Assistent</span>
         <div className="chat-panel-tools">
+          {/* todo: Stopp */}
+          {/* todo: Neues Gespräch */}
           <button type="button" className="chat-panel-btn" onClick={onClose}>
             Schließen
           </button>
         </div>
       </header>
+
+      <ChatEingabe onSend={send} />
 
       <div className="chat-scroll">
         <p className="chat-note">
@@ -41,18 +35,6 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
 
         {/* todo: Nachrichten */}
       </div>
-
-      <form className="chat-form" onSubmit={send}>
-        <input
-          className="form-input"
-          placeholder="Was suchst du?"
-          value={draft}
-          onChange={(event) => setDraft(event.target.value)}
-        />
-        <button type="submit" className="btn-reply-submit">
-          Senden
-        </button>
-      </form>
     </aside>
   );
 }

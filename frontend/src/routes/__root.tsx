@@ -1,16 +1,14 @@
 import type { QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   createRootRouteWithContext,
   Link,
   Outlet,
 } from "@tanstack/react-router";
-import { useState } from "react";
 
-import { ChatPanel } from "#/components/chat/ChatPanel";
+import { ChatAssistant } from "#/components/chat/ChatAssistant";
+import { Devtools } from "#/components/Devtools";
 import { MailWidget } from "#/components/MailWidget.tsx";
-
-const showDevToolsPanel = true;
+import { enableAssistant } from "#/demo-config.ts";
 
 export type AppRouterContext = {
   queryClient: QueryClient;
@@ -21,11 +19,6 @@ export const Route = createRootRouteWithContext<AppRouterContext>()({
 });
 
 function RootLayout() {
-  // Der Assistent haengt im Root-Layout und nicht auf einer eigenen Seite: Er
-  // bleibt beim Navigieren stehen, und man sieht die Antwortliste daneben
-  // aktuell werden.
-  const [chatOpen, setChatOpen] = useState(false);
-
   return (
     <div className="app-shell">
       <div className="flex min-h-screen flex-1 flex-col">
@@ -37,20 +30,10 @@ function RootLayout() {
           <Outlet />
         </main>
         <Footer />
-        <DevToolsPanel />
+        <Devtools />
       </div>
 
-      {chatOpen ? (
-        <ChatPanel onClose={() => setChatOpen(false)} />
-      ) : (
-        <button
-          type="button"
-          className="chat-open-btn"
-          onClick={() => setChatOpen(true)}
-        >
-          🐾 Assistent
-        </button>
-      )}
+      {enableAssistant && <ChatAssistant />}
     </div>
   );
 }
@@ -73,20 +56,20 @@ function Nav() {
             Start
           </Link>
           <Link
-            to="/posts"
+            to="/gesuche"
             activeProps={{ className: "nav-link nav-link-active" }}
             inactiveProps={{ className: "nav-link nav-link-inactive" }}
           >
             Gesuche
           </Link>
           <Link
-            to="/offers"
+            to="/angebote"
             activeProps={{ className: "nav-link nav-link-active" }}
             inactiveProps={{ className: "nav-link nav-link-inactive" }}
           >
             Angebote
           </Link>
-          <Link to="/posts/new" className="nav-cta">
+          <Link to="/gesuche/neu" className="nav-cta">
             + Einstellen
           </Link>
         </div>
@@ -103,15 +86,5 @@ function Footer() {
         Dein Tier. Dein Urlaub. Kein Stress.
       </p>
     </footer>
-  );
-}
-
-function DevToolsPanel() {
-  if (!showDevToolsPanel) {
-    return null;
-  }
-
-  return (
-    <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
   );
 }

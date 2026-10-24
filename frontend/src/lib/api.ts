@@ -1,14 +1,18 @@
 import { queryOptions } from "@tanstack/react-query";
 
 import type {
-  CategoryId,
-  CreatePostInput,
-  CreateReplyInput,
-  PostType,
+  CreateAntwortInput,
+  CreateGesuchInput,
+  Tierart,
 } from "#/types.ts";
-import { PostSchema, ReplySchema } from "#/types.ts";
+import {
+  AngebotSchema,
+  AntwortSchema,
+  EintragSchema,
+  GesuchSchema,
+} from "#/types.ts";
 
-// Kein BASE_URL: Der Vite-Dev-Server leitet /api an das Backend auf Port 63080
+// Kein BASE_URL: Der Vite-Dev-Server leitet /api an das Backend auf Port 26080
 // weiter (siehe vite.config.ts). Damit braucht das Backend kein CORS.
 
 async function fetchJson(path: string, init?: RequestInit) {
@@ -27,55 +31,78 @@ async function postJson(path: string, body: unknown) {
   });
 }
 
+function tierartParam(tierart?: Tierart) {
+  return tierart ? `?${new URLSearchParams({ tierart })}` : "";
+}
+
 // ─── Queries ──────────────────────────────────────────────────────────────────
 
-export const getPostsQueryOptions = (type?: PostType, category?: CategoryId) =>
+export const gesucheQueryOptions = (tierart?: Tierart) =>
   queryOptions({
-    queryKey: ["posts", "list", type ?? null, category ?? null],
+    queryKey: ["gesuche", "list", tierart ?? null],
     async queryFn() {
-      const params = new URLSearchParams();
-      if (type) {
-        params.set("type", type);
-      }
-      if (category) {
-        params.set("category", category);
-      }
-      const search = params.size > 0 ? `?${params}` : "";
-      return PostSchema.array().parse(await fetchJson(`/posts${search}`));
+      return GesuchSchema.array().parse(
+        await fetchJson(`/gesuche${tierartParam(tierart)}`),
+      );
     },
   });
 
-export const getPostQueryOptions = (postId: string) =>
+export const gesuchQueryOptions = (gesuchId: string) =>
   queryOptions({
-    queryKey: ["posts", "detail", postId],
+    queryKey: ["gesuche", "detail", gesuchId],
     async queryFn() {
-      return PostSchema.parse(await fetchJson(`/posts/${postId}`));
+      return GesuchSchema.parse(await fetchJson(`/gesuche/${gesuchId}`));
     },
   });
 
-export const getRepliesByPostIdQueryOptions = (postId: string) =>
+export const angeboteQueryOptions = (tierart?: Tierart) =>
   queryOptions({
-    queryKey: ["replies", "list", postId],
+    queryKey: ["angebote", "list", tierart ?? null],
     async queryFn() {
-      return ReplySchema.array().parse(
-        await fetchJson(`/posts/${postId}/replies`),
+      return AngebotSchema.array().parse(
+        await fetchJson(`/angebote${tierartParam(tierart)}`),
+      );
+    },
+  });
+
+export const angebotQueryOptions = (angebotId: string) =>
+  queryOptions({
+    queryKey: ["angebote", "detail", angebotId],
+    async queryFn() {
+      return AngebotSchema.parse(await fetchJson(`/angebote/${angebotId}`));
+    },
+  });
+
+export const eintragQueryOptions = (eintragId: string) =>
+  queryOptions({
+    queryKey: ["eintraege", "detail", eintragId],
+    async queryFn() {
+      return EintragSchema.parse(await fetchJson(`/eintraege/${eintragId}`));
+    },
+  });
+
+export const antwortenQueryOptions = (eintragId: string) =>
+  queryOptions({
+    queryKey: ["antworten", "list", eintragId],
+    async queryFn() {
+      return AntwortSchema.array().parse(
+        await fetchJson(`/antworten?${new URLSearchParams({ eintragId })}`),
       );
     },
   });
 
 // ─── Mutations ────────────────────────────────────────────────────────────────
 
-export async function createPost(input: CreatePostInput) {
-  return PostSchema.parse(await postJson("/posts", input));
+export async function createGesuch(input: CreateGesuchInput) {
+  return GesuchSchema.parse(await postJson("/gesuche", input));
 }
 
-export async function createReply(postId: string, input: CreateReplyInput) {
-  return ReplySchema.parse(await postJson(`/posts/${postId}/replies`, input));
-}
-
-export async function markInterested(postId: string) {
-  return PostSchema.parse(
-    await fetchJson(`/posts/${postId}/interested`, { method: "PUT" }),
+export async function createAntwort(
+  eintragId: string,
+  input: CreateAntwortInput,
+) {
+  return AntwortSchema.parse(
+    await postJson("/antworten", { eintragId, ...input }),
   );
 }
 

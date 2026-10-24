@@ -1,14 +1,16 @@
 import { createAnthropicChat } from "@tanstack/ai-anthropic";
 import { createOllamaChat } from "@tanstack/ai-ollama";
 
-/// Das Modell, mit dem der Assistent spricht. Gewählt wird es beim Start des
-/// Chat-Servers mit `HUETLY_MODEL`, Groß- und Kleinschreibung egal:
-///
-/// - `sonnet` (Standard): Claude Sonnet 5.5, braucht `HUETLY_ANTHROPIC_API_KEY`
-/// - `haiku`: Claude Haiku 5.5, kleiner und schneller, derselbe Schlüssel
-/// - `gemma`: Gemma über ein lokales Ollama, kein Konto, kein Netz
-///
-/// Der Adapter ist die einzige Stelle, die den Anbieter kennt.
+/**
+ * Das Modell, mit dem der Assistent spricht. Gewählt wird es beim Start des
+ * Chat-Servers mit `HUETLY_MODEL`, Groß- und Kleinschreibung egal:
+ *
+ * - `sonnet` (Standard): Claude Sonnet 5.5, braucht `HUETLY_ANTHROPIC_API_KEY`
+ * - `haiku`: Claude Haiku 5.5, kleiner und schneller, derselbe Schlüssel
+ * - `gemma`: Gemma über ein lokales Ollama, kein Konto, kein Netz
+ *
+ * Der Adapter ist die einzige Stelle, die den Anbieter kennt.
+ */
 export const modelName = (process.env.HUETLY_MODEL ?? "sonnet").toLowerCase();
 
 export const chatAdapter = createChatAdapter();
@@ -30,8 +32,10 @@ function createChatAdapter() {
   );
 }
 
-/// Der Schlüssel heißt nicht `ANTHROPIC_API_KEY`, damit andere Werkzeuge auf
-/// demselben Rechner ihn nicht versehentlich mitbenutzen.
+/**
+ * Der Schlüssel heißt nicht `ANTHROPIC_API_KEY`, damit andere Werkzeuge auf
+ * demselben Rechner ihn nicht versehentlich mitbenutzen.
+ */
 function anthropicApiKey() {
   const apiKey = process.env.HUETLY_ANTHROPIC_API_KEY;
   if (!apiKey) {

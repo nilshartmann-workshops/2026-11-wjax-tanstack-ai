@@ -7,22 +7,19 @@ Beispielanwendung zu meinem Vortrag auf der W-JAX 2026. hütly ist eine kleine P
 Dieses Repository enthält mehrere Stände der Anwendung:
 
 - `main`: der Ausgangsstand, von dem das Live Coding startet
-- [`schritte`](https://github.com/ORG/TEILNEHMER-REPO/tree/schritte): alle Schritte, die ich zeigen wollte, je ein Commit pro Thema. In der [Commit-Liste](https://github.com/ORG/TEILNEHMER-REPO/commits/schritte/) siehst du sie einzeln. **Der beste Einstieg,** sieh dir einfach den Diff jedes Commits an.
-- [`live_coding`](https://github.com/ORG/TEILNEHMER-REPO/tree/live_coding): der Code, den ich während des Vortrags tatsächlich geschrieben habe
+- [`schritte`](https://github.com/nilshartmann-workshops/2026-11-wjax-tanstack-ai/tree/schritte): alle Schritte, die ich zeigen wollte, je ein Commit pro Thema. In der [Commit-Liste](https://github.com/nilshartmann-workshops/2026-11-wjax-tanstack-ai/commits/schritte/) siehst du sie einzeln. **Der beste Einstieg,** sieh dir einfach den Diff jedes Commits an.
+- [`live_coding`](https://github.com/nilshartmann-workshops/2026-11-wjax-tanstack-ai/tree/live_coding): der Code, den ich während des Vortrags tatsächlich geschrieben habe
 
 ## Aufbau
 
 ```
-backend/    API-Server (Port 63080): die REST-API von hütly, Daten im Speicher
-frontend/   die React-Anwendung (Port 63000), Vite, TanStack Router und Query
-server/     Chat-Server (Port 63081): hier läuft der Assistent mit TanStack AI
+api-backend/  API-Server (Port 26080): die REST-API von hütly, Daten im Speicher
+frontend/     die React-Anwendung (Port 26000), Vite, TanStack Router und Query
+server/       Chat-Server (Port 26081): hier läuft der Assistent mit TanStack AI
+shared/       die Tool-Definitionen, der Vertrag zwischen Chat-Server und Browser
 ```
 
 Der API-Server steht für euer bestehendes Backend, in einer Java-Anwendung etwa ein Spring-Boot-Dienst. Der Chat-Server spricht ihn nur über die Fassade in `server/src/huetly-api.ts` an. Das Frontend erreicht beide Server über den Proxy von Vite, deshalb braucht keiner von ihnen CORS.
-
-## Beispiele
-
-TODO: Aufzählung dessen, was hier zu sehen ist, je Zeile ein Thema mit der Stelle im Code.
 
 ## Getting started
 
@@ -37,15 +34,17 @@ Pakete installieren, einmal im Wurzelverzeichnis:
 pnpm install
 ```
 
-Dann die drei Prozesse in je einem Terminal starten:
+Dann die drei Prozesse in je einem Terminal starten, jeweils im Wurzelverzeichnis:
 
 ```bash
-cd backend && pnpm start
-cd server && pnpm dev
-cd frontend && pnpm dev
+pnpm dev:api
+pnpm dev:server
+pnpm dev:frontend
 ```
 
-Die Anwendung läuft danach auf http://localhost:63000.
+Die Anwendung läuft danach auf http://localhost:26000.
+
+Läuft ein Prozess weiter, nachdem du die IDE oder das Terminal geschlossen hast, beendet `scripts/stop.sh` alle drei. `pnpm dev:server` beendet einen alten Chat-Server vor dem Start selbst.
 
 ### Das Modell wählen
 
@@ -60,18 +59,24 @@ Der Chat-Server liest beim Start `HUETLY_MODEL`. Groß- und Kleinschreibung ist 
 ```bash
 # Claude Sonnet, der Schlüssel steht in der Umgebung
 export HUETLY_ANTHROPIC_API_KEY=sk-ant-...
-cd server && pnpm dev
+pnpm dev:server
 
 # Claude Haiku
-cd server && HUETLY_MODEL=haiku pnpm dev
+HUETLY_MODEL=haiku pnpm dev:server
 
 # Gemma lokal, ohne Konto und ohne Netz
-cd server && HUETLY_MODEL=gemma pnpm dev
+HUETLY_MODEL=gemma pnpm dev:server
 ```
 
-Läuft Ollama nicht auf `localhost:11434`, gibst du die Adresse mit: `HUETLY_MODEL=gemma OLLAMA_BASE_URL=http://... pnpm dev`.
+Statt den Schlüssel jedes Mal zu exportieren, kannst du die Zeile mit `export` in die Datei `~/huetly-key.sh` schreiben. `pnpm dev:server` und `scripts/05-anthropic-direkt.sh` laden sie, wenn es sie gibt.
+
+Läuft Ollama nicht auf `localhost:11434`, gibst du die Adresse mit: `HUETLY_MODEL=gemma OLLAMA_BASE_URL=http://... pnpm dev:server`.
 
 Welches Modell läuft, steht in der ersten Zeile, die der Chat-Server ausgibt.
+
+Der Chat-Server schreibt jeden AG-UI-Event ins Terminal.
+
+Die Aufrufe mit `curl` aus dem Vortrag liegen fertig in `scripts/`, zum Beispiel `scripts/10-chat-route.sh`.
 
 Geprüft wird alles mit `pnpm check` im Wurzelverzeichnis (Formatierung, Linter, TypeScript).
 

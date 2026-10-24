@@ -2,6 +2,9 @@
   "name": "huetly",
   "private": true,
   "scripts": {
-    "check": "pnpm -r check"
+    "check": "pnpm -r check",
+    "dev:api": "pnpm --filter @huetly/api-backend dev",
+    "dev:server": "scripts/stop.sh 26081; if [ -f ~/huetly-key.sh ]; then . ~/huetly-key.sh; fi; pnpm --filter @huetly/server dev",
+    "dev:frontend": "scripts/stop.sh 26000; pnpm --filter @huetly/frontend dev"
   }
 }

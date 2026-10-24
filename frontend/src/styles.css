@@ -1647,6 +1647,9 @@ body {
 .app-shell {
   @apply flex min-h-screen items-stretch;
 }
+.app-shell:has(.chat-panel) {
+  --chat-panel-width: 440px;
+}
 .chat-open-btn {
   @apply fixed right-6 bottom-6 z-40 inline-flex items-center;
   gap: 8px;
@@ -1658,6 +1661,21 @@ body {
   font-size: 15px;
   box-shadow: var(--shadow-md);
   cursor: pointer;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+.query-devtools-trigger {
+  @apply fixed z-40;
+  bottom: 12px;
+  left: 12px;
+}
+.query-devtools-trigger-next-to-ai {
+  left: 76px;
+}
+.chat-open-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(232, 131, 90, 0.45);
 }
 .chat-panel {
   @apply sticky top-0 flex h-screen flex-col;
@@ -1665,6 +1683,15 @@ body {
   flex: none;
   background: var(--color-cream);
   border-left: 1.5px solid var(--color-cream-dark);
+}
+/*
+ * Das Panel der Devtools endet links vom Chat-Panel, statt die Nachrichten zu
+ * verdecken. Die Devtools setzen Position und Breite als Inline-Style, deshalb
+ * `!important`.
+ */
+body:has(.chat-panel) #tanstack_devtools {
+  inset-inline: 0 440px !important;
+  max-inline-size: calc(100% - 440px) !important;
 }
 .chat-panel-header {
   @apply flex items-center justify-between;
@@ -1700,6 +1727,10 @@ body {
   gap: 14px;
   padding: 18px;
 }
+.chat-messages {
+  @apply flex flex-col;
+  gap: 14px;
+}
 .chat-user {
   @apply self-end;
   max-width: 85%;
@@ -1710,18 +1741,44 @@ body {
   color: var(--color-ink);
   margin: 0;
 }
+.chat-user .chat-text {
+  max-width: none;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
 .chat-turn {
-  @apply flex flex-col;
+  @apply grid items-start;
+  grid-template-columns: 32px 1fr;
+  gap: 8px;
+}
+.chat-avatar {
+  font-size: 20px;
+  line-height: 32px;
+  text-align: center;
+}
+.chat-turn-parts {
+  @apply flex min-w-0 flex-col;
   gap: 10px;
 }
 .chat-text {
   @apply prose prose-sm max-w-none;
+  align-self: flex-start;
+  width: fit-content;
+  max-width: 85%;
   background: #fff;
   border: 1.5px solid var(--color-cream-dark);
   border-radius: 18px 18px 18px 4px;
   padding: 10px 14px;
   font-size: 14px;
   color: var(--color-ink);
+}
+.chat-text > :first-child {
+  margin-top: 0;
+}
+.chat-text > :last-child {
+  margin-bottom: 0;
 }
 .chat-thinking {
   font-size: 12px;
@@ -1796,8 +1853,73 @@ body {
   margin: 0;
 }
 .chat-form {
-  @apply flex;
+  @apply flex flex-col;
   gap: 8px;
   padding: 14px 18px;
-  border-top: 1.5px solid var(--color-cream-dark);
+  border-bottom: 1.5px solid var(--color-cream-dark);
+}
+.chat-input {
+  resize: vertical;
+  min-height: 64px;
+  line-height: 1.45;
+}
+.chat-form-actions {
+  @apply flex items-center justify-between;
+}
+.chat-history-btn {
+  @apply flex items-center;
+  gap: 5px;
+  padding: 4px 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 12.5px;
+  color: var(--color-ink-muted);
+  cursor: pointer;
+}
+.chat-history-btn:hover {
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+}
+.chat-history {
+  width: min(900px, calc(100vw - 64px));
+  max-height: calc(100vh - 64px);
+  margin: auto;
+  padding: 0;
+  border: none;
+  border-radius: 16px;
+  background: var(--color-cream);
+  box-shadow: 0 12px 40px rgba(45, 36, 24, 0.25);
+}
+.chat-history::backdrop {
+  background: rgba(45, 36, 24, 0.4);
+}
+.chat-history-header {
+  @apply sticky top-0 flex items-center justify-between;
+  padding: 14px 18px;
+  background: var(--color-cream);
+  border-bottom: 1.5px solid var(--color-cream-dark);
+}
+.chat-history-list {
+  @apply flex flex-col;
+  gap: 10px;
+  padding: 18px;
+  margin: 0;
+  list-style: none;
+}
+.chat-history-entry {
+  @apply w-full text-left;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--color-cream-dark);
+  background: #fff;
+  color: var(--color-ink);
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  cursor: pointer;
+}
+.chat-history-entry:hover {
+  border-color: var(--color-accent);
 }

@@ -1,0 +1,261 @@
+{
+  "gesuche": [
+    {
+      "id": "g1",
+      "titel": "Wer kümmert sich um meine Landschildkröten?",
+      "autor": "hilde_offline",
+      "beschreibung": "Zwei sehr entspannte Landschildkröten suchen liebevolle Urlaubsbetreuung.\n\n**Emilia** und **Franz** sind seit 8 Jahren bei mir und kennen ihre Routine in- und auswendig. Kein Drama, kein Fluchtversuch.\n\nWas du mitbringen solltest:\n\n- Geduld beim Salatschneiden (Bio bitte, sie schmecken den Unterschied)\n- Bereitschaft, täglich das Freigehege zu kontrollieren\n- Keine Angst vor Reptilien\n\nEine ausführliche Pflegeanleitung liegt **ausgedruckt neben dem Gehege** -- alles Wichtige Schritt für Schritt erklärt.",
+      "tier": "2 Landschildkröten",
+      "tierart": "Reptil",
+      "zeitraum": "3 Wochen im Juli",
+      "ort": "Hamburg-Altona",
+      "erstelltAm": "2026-06-10T10:00:00Z"
+    },
+    {
+      "id": "g2",
+      "titel": "Katze Gandalf braucht tägliche Audienz",
+      "autor": "tolkien_ts",
+      "beschreibung": "Gandalf ist ein 7-jähriger Kater mit **sehr klaren Vorstellungen**. Er erwartet täglich Gesellschaft, Futter pünktlich um 8 und 18 Uhr, und absolut keine Veränderungen seiner Routine.\n\nWas bedeutet das konkret?\n\n- Futternapf immer links vom Wassernapf\n- Kissen auf dem Sofa bleibt wo es ist\n- Kein Besuch unter der Woche\n\nErfahrung mit eigenwilligen Katzen ist ein **großes Plus**.",
+      "tier": "1 Katze, sehr eigenwillig",
+      "tierart": "Katze",
+      "zeitraum": "10 Tage im August",
+      "ort": "Berlin-Mitte",
+      "erstelltAm": "2026-04-12T14:30:00Z"
+    },
+    {
+      "id": "g3",
+      "titel": "Hund ignoriert console.log, braucht Gassi",
+      "autor": "felix.node",
+      "beschreibung": "Bello ist ein **fröhlicher Labrador**, der zweimal täglich Gassi braucht und am liebsten durch den Park tobt.\n\nSein Tagesablauf:\n\n- Morgens: große Runde im Park (mindestens 45 Minuten)\n- Mittags: kurze Pipi-Runde um den Block\n- Abends: noch mal ausgiebig toben\n\nBello ist **kinderlieb** und kommt mit anderen Hunden bestens zurecht. Leckerlis sind im Schrank, aber bitte **nicht überfüttern** -- er bettelt sehr überzeugend.",
+      "tier": "Labrador, 3 Jahre",
+      "tierart": "Hund",
+      "zeitraum": "jedes Wochenende im Mai",
+      "ort": "München-Schwabing",
+      "erstelltAm": "2026-04-14T09:15:00Z"
+    },
+    {
+      "id": "g4",
+      "titel": "Axolotl-Pärchen sucht erfahrene Urlaubsbetreuung",
+      "autor": "aqua.dev",
+      "beschreibung": "Zwei Axolotl (bitte nicht erschrecken, **die sehen einfach so aus**) suchen erfahrene Urlaubsbetreuung.\n\nWas zu tun ist:\n\n- Täglich Wassertemperatur prüfen (max. **20 Grad C**, sonst wird es kritisch)\n- Alle zwei Tage füttern (Pellets in der Dose neben dem Becken)\n- Einmal pro Woche Teilwasserwechsel\n\nWichtig: **niemals anfassen** und keine plötzlichen Erschütterungen am Aquarium. Aquarium-Erfahrung ist sehr hilfreich.",
+      "tier": "2 Axolotl (bitte nicht erschrecken)",
+      "tierart": "Reptil",
+      "zeitraum": "2 Wochen im Juni",
+      "ort": "Hamburg-Eimsbüttel",
+      "erstelltAm": "2026-04-15T11:00:00Z"
+    },
+    {
+      "id": "g5",
+      "titel": "3 Hühner suchen temporären DevOps",
+      "autor": "farm.tsx",
+      "beschreibung": "Drei Hühner suchen einen temporären DevOps für ihren Stall. Die Crew:\n\n- **Henrietta** -- die Chefin, pickt zuerst\n- **Helga** -- entspannt, legt am zuverlässigsten\n- **HTML** -- jung, chaotisch, braucht manchmal eine Extra-Einladung in den Stall\n\nTägliche Aufgaben:\n\n- Morgens Stall öffnen, Futter und frisches Wasser\n- Eier einsammeln (meist **2 bis 3 pro Tag**)\n- Abends Stall sicher verschließen (Fuchs!)\n\nKein Vorwissen nötig, die drei sind **sehr gutmütig**.",
+      "tier": "3 Hühner, legen täglich",
+      "tierart": "Sonstiges",
+      "zeitraum": "1 Woche Pfingsten",
+      "ort": "Bremen",
+      "erstelltAm": "2026-05-21T08:00:00Z"
+    },
+    {
+      "id": "g6",
+      "titel": "Kaktus muss einmal im Monat gegossen werden",
+      "autor": "lazy_gardener",
+      "beschreibung": "Ein **sehr genügsamer Kaktus** sucht jemanden, der ihn nicht komplett vergisst.\n\nDie gute Nachricht: Der Pflegeaufwand ist **minimal**.\n\n- **Einmal im Monat** gießen, ein kleines Glas Wasser reicht\n- Heller Standort, gerne am Fenster\n- Auf keinen Fall überwässern -- das ist die einzige echte Gefahr\n\nWer also wenig Zeit hat, aber trotzdem helfen möchte: **Das ist dein Gesuch.** Schiefgehen kann hier fast nichts.",
+      "tier": "1 Kaktus, sehr genügsam",
+      "tierart": "Pflanze",
+      "zeitraum": "ganzer Sommer",
+      "ort": "Köln-Ehrenfeld",
+      "erstelltAm": "2026-05-19T16:45:00Z"
+    },
+    {
+      "id": "g7",
+      "titel": "Bartagame Thorin isst nur Bio-Salat",
+      "autor": "thorin_dev",
+      "beschreibung": "Thorin ist eine 4-jährige Bartagame mit **gehobenen Ansprüchen**. Er frisst ausschließlich Bio-Salat und inspiziert jede Portion misstrauisch.\n\nTerrarien-Eckdaten:\n\n- Warmzone: **38-42 Grad C** (UV-Strahler, Zeitschaltuhr bereits eingestellt)\n- Kühlzone: 26-28 Grad C\n- Licht: 12 h täglich, keine Ausnahmen\n\nFütterung:\n\n- Morgens: Rucola, Feldsalat, gelegentlich Löwenzahn\n- 3x pro Woche: Insekten (Schachtel im Kühlschrank, bitte nicht erschrecken)\n\nAlles Weitere erkläre ich beim **kurzen Einführungstermin** vor Ort.",
+      "tier": "Bartagame, 4 Jahre",
+      "tierart": "Reptil",
+      "zeitraum": "5 Tage im September",
+      "ort": "Frankfurt",
+      "erstelltAm": "2026-04-18T12:00:00Z"
+    },
+    {
+      "id": "g8",
+      "titel": "Zwei Katzen, eine davon senior developer",
+      "autor": "sara.jsx",
+      "beschreibung": "Zwei Katzen, zwei Temperamente -- beide brauchen Betreuung mit Fingerspitzengefühl.\n\n- **Mimi (14)** ist die ruhige Senior-Katze. Schläft viel, mag ihre Ruhe, braucht **Medikamente** (Tablette morgens ins Futter)\n- **Pixel (2)** ist das chaotische Junior-Mitglied. Spielt gern, klettert überall hoch, will **viel Beschäftigung**\n\nWichtig:\n\n- Getrennte Futternäpfe, sonst frisst Pixel auch Mimis Portion\n- Tägliche Streicheleinheiten für beide\n- Katzenklo zweimal täglich kontrollieren\n\nDie beiden beaufsichtigen sich gegenseitig -- meistens jedenfalls.",
+      "tier": "Mimi (14) und Pixel (2)",
+      "tierart": "Katze",
+      "zeitraum": "2 Wochen im Juli",
+      "ort": "Hamburg-Barmbek",
+      "erstelltAm": "2026-05-20T10:30:00Z"
+    },
+    {
+      "id": "g9",
+      "titel": "Zimmerpflanzen-WG sucht Urlaubspfleger",
+      "autor": "plant_parent",
+      "beschreibung": "12 Zimmerpflanzen suchen jemanden mit **grünem Daumen**, oder zumindest gutem Willen.\n\nDie WG besteht aus:\n\n- **Monstera Deliciosa** \"Hildegard\": wöchentlich, mag Kalk nicht\n- **Ficus Lyrata** \"Konrad\": alle 10 Tage, **kein Zugluft!**\n- 2x Orchidee: nur Tauchen, nie eingießen\n- 8 weitere (vollständige Liste + Gießplan liegt auf dem Küchentisch)\n\nEine ausführliche Einführung gibt es vorab. Es liegt auch ein **schriftlicher Gießkalender** bereit, der genau festhält, wann welche Pflanze dran ist.",
+      "tier": "12 Zimmerpflanzen (Liste vorhanden)",
+      "tierart": "Pflanze",
+      "zeitraum": "3 Wochen August",
+      "ort": "Berlin-Prenzlauer Berg",
+      "erstelltAm": "2026-05-18T15:00:00Z"
+    },
+    {
+      "id": "g10",
+      "titel": "Goldfisch Nemo findet sich selbst nicht",
+      "autor": "nemo.js",
+      "beschreibung": "Nemo ist ein **philosophischer Goldfisch** mit existenziellen Fragen. Er braucht nicht viel, aber das Wenige zuverlässig.\n\nWas Nemo braucht:\n\n- **Einmal täglich** eine kleine Prise Futter (nicht mehr, er kennt kein Maß)\n- Einmal pro Woche etwas Wasser tauschen\n- Gelegentlich jemanden, der **über sein Dasein nachdenkt**\n\nNemo stellt keine hohen Ansprüche -- nur die Frage nach dem Sinn von allem. Beantworten musst du sie nicht, **zuhören reicht**.",
+      "tier": "1 Goldfisch, philosophisch",
+      "tierart": "Sonstiges",
+      "zeitraum": "verlängertes Wochenende",
+      "ort": "Düsseldorf",
+      "erstelltAm": "2026-04-21T13:00:00Z"
+    }
+  ],
+  "angebote": [
+    {
+      "id": "a1",
+      "titel": "Gassi in Hamburg, auch bei Schietwetter",
+      "autor": "gassi_gunnar",
+      "ueberMich": "Ich bin den ganzen Sommer in Hamburg und gehe gerne mit deinem Hund raus.\n\nWas du bekommst:\n\n- Zwei Runden am Tag, morgens lang und abends kurz\n- Fotos von unterwegs, damit du siehst, dass es ihm gut geht\n- Regen ist für mich kein Argument, sondern Wetter\n\nIch habe selbst 12 Jahre einen Beagle gehabt und kenne die Diskussionen am anderen Ende der Leine.",
+      "erfahrungMit": ["Hund"],
+      "zeitraum": "Juli und August",
+      "ort": "Hamburg-Altona",
+      "erstelltAm": "2026-06-08T09:00:00Z"
+    },
+    {
+      "id": "a2",
+      "titel": "Reptilien-Sitting mit eigener Wärmelampe",
+      "autor": "reptil_fan_93",
+      "ueberMich": "Zwei Bartagamen wohnen bei mir, eine dritte Echse fällt nicht auf.\n\nIch kenne mich aus mit:\n\n- Wärmelampen, UV-Röhren und dem ewigen Streit um die richtige Temperatur\n- Futtertieren, ohne dabei Faxen zu machen\n- Tieren, die zwei Wochen so tun, als wären sie Deko\n\nBio-Salat schneide ich klaglos, auch in dünne Streifen.",
+      "erfahrungMit": ["Reptil"],
+      "zeitraum": "ganzer Sommer",
+      "ort": "Hamburg-Eimsbüttel",
+      "erstelltAm": "2026-06-05T17:20:00Z"
+    },
+    {
+      "id": "a3",
+      "titel": "Katzen-Audienz auf Zuruf in Berlin",
+      "autor": "cat_whisperer",
+      "ueberMich": "Ich komme täglich vorbei und halte den Betrieb aufrecht.\n\nMein Angebot:\n\n- Futter pünktlich, Napfposition wird respektiert\n- Katzenklo täglich, ohne Verhandlung\n- Eine halbe Stunde Anwesenheit, in der ich nicht auf mein Handy schaue\n\nEigenwillige Herrschaften sind ausdrücklich willkommen. Ich nehme es nicht persönlich, wenn ich zwei Tage lang ignoriert werde.",
+      "erfahrungMit": ["Katze"],
+      "zeitraum": "10 Tage im August",
+      "ort": "Berlin-Mitte",
+      "erstelltAm": "2026-05-30T11:10:00Z"
+    },
+    {
+      "id": "a4",
+      "titel": "Ich gieße, während du im Urlaub bist",
+      "autor": "green_thumb",
+      "ueberMich": "Zimmerpflanzen, Balkonkästen, Kakteen: Ich komme zweimal die Woche vorbei.\n\nMitgebracht werden Gießkanne, Sprüher und ein Blick für Blattläuse. Eine Liste mit Sonderwünschen je Pflanze lese ich wirklich, auch wenn sie lang ist.\n\nWer eine **Monstera** hat, die ständig neue Blätter schiebt: Ich freue mich mit.",
+      "erfahrungMit": ["Pflanze"],
+      "zeitraum": "jederzeit außer Weihnachten",
+      "ort": "Köln-Ehrenfeld",
+      "erstelltAm": "2026-05-27T08:45:00Z"
+    },
+    {
+      "id": "a5",
+      "titel": "Homeoffice mit Platz für einen Hund",
+      "autor": "merge_conflict_marie",
+      "ueberMich": "Ich sitze den ganzen Tag am Rechner, und der Platz unter dem Schreibtisch ist frei.\n\nDein Hund bekommt:\n\n- Gesellschaft von morgens bis abends\n- Drei Runden täglich, eine davon lang\n- Einen Menschen, der auch mal mitten am Tag aufsteht\n\nIch arbeite in Schwabing und bin nur für Termine unterwegs, höchstens zwei Stunden am Stück.",
+      "erfahrungMit": ["Hund", "Katze"],
+      "zeitraum": "Mai bis Juli, wochentags",
+      "ort": "München-Schwabing",
+      "erstelltAm": "2026-05-22T13:30:00Z"
+    },
+    {
+      "id": "a6",
+      "titel": "Alles mit Federn, ich mache das",
+      "autor": "farmgirl_77",
+      "ueberMich": "Hühner, Enten, Gänse, eine sehr laute Wachtel: alles schon dagewesen.\n\nIch bin auf einem Hof groß geworden und weiß, dass Federvieh keinen Urlaub kennt. Morgens auf, abends zu, Wasser zweimal am Tag, und die eine Henne, die immer woanders legt, finde ich auch.",
+      "erfahrungMit": ["Sonstiges"],
+      "zeitraum": "Pfingsten und die Wochen danach",
+      "ort": "Bremen",
+      "erstelltAm": "2026-05-16T07:00:00Z"
+    },
+    {
+      "id": "a7",
+      "titel": "Aquarium-Betreuung, auch für nachdenkliche Fische",
+      "autor": "philosophy_fan",
+      "ueberMich": "Füttern, Wasserwerte prüfen, Scheibe abziehen: das kann ich.\n\nIch habe selbst ein Becken mit Garnelen und einem Kampffisch, der jeden Morgen so tut, als hätte er mich noch nie gesehen. Existenzielle Krisen im Becken sind bei mir in guten Händen.",
+      "erfahrungMit": ["Sonstiges"],
+      "zeitraum": "Wochenenden und Feiertage",
+      "ort": "Düsseldorf",
+      "erstelltAm": "2026-05-11T18:15:00Z"
+    },
+    {
+      "id": "a8",
+      "titel": "Zwei Katzen gleichzeitig sind kein Problem",
+      "autor": "nullpointer_nina",
+      "ueberMich": "Ich wohne in Barmbek und betreue im Juli gerne Katzen, auch mehrere.\n\nMit Mehrkatzenhaushalten kenne ich mich aus: getrennte Näpfe, getrennte Zeiten, und niemand wird beim Fressen überholt. Medikamente gebe ich, wenn du es mir einmal zeigst.",
+      "erfahrungMit": ["Katze"],
+      "zeitraum": "2 Wochen im Juli",
+      "ort": "Hamburg-Barmbek",
+      "erstelltAm": "2026-05-09T10:05:00Z"
+    }
+  ],
+  "antworten": [
+    {
+      "id": "aw1",
+      "eintragId": "g1",
+      "autor": "reptil_fan_93",
+      "text": "Habe selbst zwei Bartagamen und kenne mich mit Reptilien aus. Gerne!",
+      "erstelltAm": "2026-04-10T11:30:00Z"
+    },
+    {
+      "id": "aw2",
+      "eintragId": "g1",
+      "autor": "schildi_lover",
+      "text": "Kann täglich vorbeikommen, wohne zwei Straßen weiter.",
+      "erstelltAm": "2026-04-11T09:00:00Z"
+    },
+    {
+      "id": "aw3",
+      "eintragId": "g2",
+      "autor": "cat_whisperer",
+      "text": "Katzen liebe ich — auch eigenwillige. Melde mich!",
+      "erstelltAm": "2026-04-13T10:00:00Z"
+    },
+    {
+      "id": "aw4",
+      "eintragId": "g5",
+      "autor": "farmgirl_77",
+      "text": "Hühner kein Problem, habe auf einem Bauernhof groß gelernt.",
+      "erstelltAm": "2026-04-16T14:00:00Z"
+    },
+    {
+      "id": "aw5",
+      "eintragId": "g6",
+      "autor": "green_thumb",
+      "text": "Pflanzen sind meine Spezialität, Kaktus erst recht.",
+      "erstelltAm": "2026-04-18T11:00:00Z"
+    },
+    {
+      "id": "aw6",
+      "eintragId": "g10",
+      "autor": "philosophy_fan",
+      "text": "Habe Erfahrung mit Goldfischen und existenziellen Krisen.",
+      "erstelltAm": "2026-04-22T08:30:00Z"
+    },
+    {
+      "id": "aw7",
+      "eintragId": "a1",
+      "autor": "hilde_offline",
+      "text": "Machst du auch Schildkröten? Fragen kostet ja nichts.",
+      "erstelltAm": "2026-06-09T08:20:00Z"
+    },
+    {
+      "id": "aw8",
+      "eintragId": "a3",
+      "autor": "tolkien_ts",
+      "text": "Gandalf hätte Bedarf. Er entscheidet allerdings selbst, wer würdig ist.",
+      "erstelltAm": "2026-06-01T19:40:00Z"
+    },
+    {
+      "id": "aw9",
+      "eintragId": "a4",
+      "autor": "felix.node",
+      "text": "Wie oft gießt du? Meine Monstera hat da klare Vorstellungen.",
+      "erstelltAm": "2026-05-28T12:00:00Z"
+    }
+  ]
+}

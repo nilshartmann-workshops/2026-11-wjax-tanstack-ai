@@ -2,18 +2,18 @@
   "name": "@huetly/server",
   "private": true,
   "type": "module",
-  "exports": {
-    "./tools": "./src/tool-definitions.ts"
-  },
   "scripts": {
-    "dev": "node --watch src/server.ts",
+    "dev": "NODE_ENV=development node --watch src/chat-server.ts",
+    "test": "node --test src/*.test.ts",
     "check": "prettier --check . && tsc --noEmit"
   },
   "dependencies": {
     "@hono/node-server": "^2.1.5",
-    "@tanstack/ai": "0.71.0",
-    "@tanstack/ai-anthropic": "0.23.0",
-    "@tanstack/ai-ollama": "0.12.2",
+    "@huetly/shared": "workspace:*",
+    "@tanstack/ai": "1.0.0",
+    "@tanstack/ai-anthropic": "1.0.0",
+    "@tanstack/ai-ollama": "1.0.0",
+    "@tanstack/devtools-event-bus": "^0.4.3",
     "hono": "^4.13.13",
     "zod": "^4.4.3"
   },

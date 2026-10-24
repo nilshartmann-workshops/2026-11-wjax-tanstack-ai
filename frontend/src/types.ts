@@ -2,65 +2,80 @@ import { z } from "zod";
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
 
-export const CategoryIdSchema = z.enum([
+export const TierartSchema = z.enum([
   "Katze",
   "Hund",
   "Reptil",
   "Pflanze",
   "Sonstiges",
 ]);
-export type CategoryId = z.infer<typeof CategoryIdSchema>;
+export type Tierart = z.infer<typeof TierartSchema>;
+
+/** Ein Gesuch: Jemand braucht Betreuung für sein Tier oder seine Pflanze. */
+export const GesuchSchema = z.object({
+  id: z.string(),
+  titel: z.string(),
+  autor: z.string(),
+  beschreibung: z.string(),
+  tier: z.string(),
+  tierart: TierartSchema,
+  zeitraum: z.string(),
+  ort: z.string(),
+  erstelltAm: z.iso.datetime(),
+});
+export type Gesuch = z.infer<typeof GesuchSchema>;
+
+/** Ein Angebot: Jemand bietet an, Tiere oder Pflanzen zu betreuen. */
+export const AngebotSchema = z.object({
+  id: z.string(),
+  titel: z.string(),
+  autor: z.string(),
+  ueberMich: z.string(),
+  erfahrungMit: z.array(TierartSchema),
+  zeitraum: z.string(),
+  ort: z.string(),
+  erstelltAm: z.iso.datetime(),
+});
+export type Angebot = z.infer<typeof AngebotSchema>;
 
 /**
- * Die Pinnwand, an der eine Veröffentlichung hängt: Beim Gesuch wird Betreuung
- * gebraucht, beim Angebot wird sie übernommen.
+ * Gesuch oder Angebot, nur mit Art und Titel. So liefert ihn die API, wenn
+ * nur die Id bekannt ist.
  */
-export const PostTypeSchema = z.enum(["Gesuch", "Angebot"]);
-export type PostType = z.infer<typeof PostTypeSchema>;
-
-export const PostSchema = z.object({
+export const EintragSchema = z.object({
+  art: z.enum(["Gesuch", "Angebot"]),
   id: z.string(),
-  type: PostTypeSchema,
-  title: z.string(),
-  author: z.string(),
-  description: z.string(),
-  animal: z.string(),
-  timeframe: z.string(),
-  location: z.string(),
-  category: CategoryIdSchema,
-  interested: z.number().int().nonnegative(),
-  createdAt: z.iso.datetime(),
+  titel: z.string(),
 });
-export type Post = z.infer<typeof PostSchema>;
+export type Eintrag = z.infer<typeof EintragSchema>;
 
 /** Eine Antwort unter einem Gesuch oder einem Angebot. */
-export const ReplySchema = z.object({
+export const AntwortSchema = z.object({
   id: z.string(),
-  postId: z.string(),
-  author: z.string(),
+  eintragId: z.string(),
+  autor: z.string(),
   text: z.string(),
-  createdAt: z.iso.datetime(),
+  erstelltAm: z.iso.datetime(),
 });
-export type Reply = z.infer<typeof ReplySchema>;
+export type Antwort = z.infer<typeof AntwortSchema>;
 
-export const CreateReplySchema = z.object({
-  author: z.string().min(1, "Benutzername darf nicht leer sein."),
+export const CreateAntwortSchema = z.object({
+  autor: z.string().min(1, "Benutzername darf nicht leer sein."),
   text: z.string().min(1, "Antwort darf nicht leer sein."),
 });
-export type CreateReplyInput = z.infer<typeof CreateReplySchema>;
+export type CreateAntwortInput = z.infer<typeof CreateAntwortSchema>;
 
 /**
- * POST /api/posts
- * Neues Gesuch oder neues Angebot erstellen.
+ * POST /api/gesuche
+ * Neues Gesuch erstellen.
  */
-export const CreatePostSchema = z.object({
-  type: PostTypeSchema,
-  title: z.string().min(1),
-  author: z.string().min(1),
-  description: z.string().min(1),
-  animal: z.string().min(1),
-  timeframe: z.string().min(1),
-  location: z.string().min(1),
-  category: CategoryIdSchema,
+export const CreateGesuchSchema = z.object({
+  titel: z.string().min(1),
+  autor: z.string().min(1),
+  beschreibung: z.string().min(1),
+  tier: z.string().min(1),
+  zeitraum: z.string().min(1),
+  ort: z.string().min(1),
+  tierart: TierartSchema,
 });
-export type CreatePostInput = z.infer<typeof CreatePostSchema>;
+export type CreateGesuchInput = z.infer<typeof CreateGesuchSchema>;

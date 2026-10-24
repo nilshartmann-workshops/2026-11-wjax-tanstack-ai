@@ -32,10 +32,10 @@ export default function HeroSection() {
           </p>
 
           <div className="hero-actions">
-            <Link to="/posts" className="btn-hero-primary">
+            <Link to="/gesuche" className="btn-hero-primary">
               Gesuche ansehen →
             </Link>
-            <Link to="/offers" className="btn-hero-secondary">
+            <Link to="/angebote" className="btn-hero-secondary">
               Angebote ansehen →
             </Link>
           </div>
@@ -73,7 +73,7 @@ type BalloonProps = {
   bg: string;
   color: string;
   cls: string;
-  left: string;
+  left: number;
 };
 
 function Balloon({ label, bg, color, cls, left }: BalloonProps) {
@@ -85,7 +85,7 @@ function Balloon({ label, bg, color, cls, left }: BalloonProps) {
           "--balloon-color": bg,
           background: bg,
           color,
-          left,
+          left: leftOfContent(left),
           boxShadow: `inset -3px -4px 8px rgba(0,0,0,0.08), 0 4px 16px ${bg}aa`,
         } as React.CSSProperties
       }
@@ -103,21 +103,21 @@ function FloatingBalloons() {
         bg="#a8d4b8"
         color="#2a6645"
         cls="balloon-rise-0"
-        left="10%"
+        left={0.1}
       />
       <Balloon
         label="Mit TanStack! 🚀"
         bg="#a8c8e8"
         color="#2a5f8a"
         cls="balloon-rise-1"
-        left="48%"
+        left={0.48}
       />
       <Balloon
         label="Bald mit Assistent"
         bg="#f0c898"
         color="#8a5020"
         cls="balloon-rise-2"
-        left="76%"
+        left={0.76}
       />
     </>
   );
@@ -126,12 +126,15 @@ function FloatingBalloons() {
 type FloatingAnimalProps = {
   emoji: string;
   cls: string;
-  left: string;
+  left: number;
 };
 
 function FloatingAnimal({ emoji, cls, left }: FloatingAnimalProps) {
   return (
-    <div className={twMerge("floating-animal", cls)} style={{ left }}>
+    <div
+      className={twMerge("floating-animal", cls)}
+      style={{ left: leftOfContent(left) }}
+    >
       {emoji}
     </div>
   );
@@ -140,11 +143,11 @@ function FloatingAnimal({ emoji, cls, left }: FloatingAnimalProps) {
 function FloatingAnimals() {
   return (
     <>
-      <FloatingAnimal emoji="🐾" cls="animal-rise-0" left="6%" />
-      <FloatingAnimal emoji="🐢" cls="animal-rise-1" left="20%" />
-      <FloatingAnimal emoji="🐱" cls="animal-rise-2" left="58%" />
-      <FloatingAnimal emoji="🐠" cls="animal-rise-3" left="75%" />
-      <FloatingAnimal emoji="🌿" cls="animal-rise-4" left="88%" />
+      <FloatingAnimal emoji="🐾" cls="animal-rise-0" left={0.06} />
+      <FloatingAnimal emoji="🐢" cls="animal-rise-1" left={0.2} />
+      <FloatingAnimal emoji="🐱" cls="animal-rise-2" left={0.58} />
+      <FloatingAnimal emoji="🐠" cls="animal-rise-3" left={0.75} />
+      <FloatingAnimal emoji="🌿" cls="animal-rise-4" left={0.88} />
     </>
   );
 }
@@ -203,4 +206,12 @@ function TechSection() {
       </div>
     </div>
   );
+}
+
+/**
+ * Ist der Assistent offen, fliegen Ballons und Tiere nur über die Fläche links
+ * davon. `--chat-panel-width` setzt das Stylesheet, solange das Panel da ist.
+ */
+function leftOfContent(fraction: number) {
+  return `calc((100vw - var(--chat-panel-width, 0px)) * ${fraction})`;
 }
