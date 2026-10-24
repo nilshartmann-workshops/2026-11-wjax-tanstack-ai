@@ -4,6 +4,7 @@ import { createChatOptions } from "@tanstack/ai";
 import { logEvents } from "./log-events.ts";
 import { chatAdapter } from "./model.ts";
 import { angeboteSuchenTool } from "./server-tools/angebote-suchen-tool.ts";
+import { antwortSendenTool } from "./server-tools/antwort-senden-tool.ts";
 import { gesucheSuchenTool } from "./server-tools/gesuche-suchen-tool.ts";
 import { SYSTEM_PROMPT } from "./system-prompt.ts";
 
@@ -19,5 +20,10 @@ export const chatOptions = createChatOptions({
   // 🕵️‍♂️ Zeigen: summary schickt den Denktext mit, sonst kommt er bei Claude leer an
   reasoning: { level: "high", summary: true },
   // 🕵️‍♂️ Erzählen: das Modell fordert ein Tool nur an, chat() führt es aus und dreht die Schleife
-  tools: [gesucheSuchenTool, angeboteSuchenTool, gesuchVorbereitenToolDef],
+  tools: [
+    gesucheSuchenTool,
+    angeboteSuchenTool,
+    gesuchVorbereitenToolDef,
+    antwortSendenTool,
+  ],
 });

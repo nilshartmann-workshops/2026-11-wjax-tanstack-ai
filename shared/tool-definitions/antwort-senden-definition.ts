@@ -18,4 +18,6 @@ export const antwortSendenToolDef = toolDefinition({
     text: z.string().describe("Der Text der Antwort"),
   }),
   outputSchema: z.object({ antwortId: z.string(), eintragId: z.string() }),
+  // 🕵️‍♂️ Zeigen: der Lauf hält an, bis der Nutzer entschieden hat
+  needsApproval: true,
 });

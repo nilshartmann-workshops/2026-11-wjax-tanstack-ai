@@ -1,6 +1,6 @@
 import {
   angeboteSuchenToolDef,
-  type antwortSendenToolDef,
+  antwortSendenToolDef,
   gesucheSuchenToolDef,
   gesuchVorbereitenToolDef,
 } from "@huetly/shared/tool-definitions";
@@ -8,6 +8,7 @@ import type { ToolApprovalInterrupt } from "@tanstack/ai-client";
 import { fetchServerSentEvents } from "@tanstack/ai-react";
 import { createChatHook } from "@tanstack/ai-react/ui";
 
+import { AntwortGesendetCard } from "#/components/chat/AntwortGesendetCard";
 import { AssistantMessage } from "#/components/chat/AssistantMessage";
 import { ChatAngebotCard } from "#/components/chat/ChatAngebotCard";
 import { ChatGesuchCard } from "#/components/chat/ChatGesuchCard";
@@ -33,16 +34,23 @@ const chatOptions = {
   connection: fetchServerSentEvents("/api/chat"),
   // 🕵️‍♂️ Erzählen: nur die Definitionen, ausgeführt wird auf dem Server; sie typisieren part.output
   // 🕵️‍♂️ Erzählen: ein Client-Tool bringt seine Implementierung mit und läuft hier im Browser
-  tools: [gesucheSuchenToolDef, angeboteSuchenToolDef, gesuchVorbereitenTool],
+  tools: [
+    gesucheSuchenToolDef,
+    angeboteSuchenToolDef,
+    gesuchVorbereitenTool,
+    antwortSendenToolDef,
+  ],
 };
 
 export const { useAppChat } = createChatHook({
   options: chatOptions,
   components: {
-    layout: ({ Messages }) => {
+    layout: ({ Messages, Interrupts }) => {
       return (
         <div className="chat-messages">
           <Messages />
+          {/* 🕵️‍♂️ Fallstrick: ohne <Interrupts /> erscheint die Freigabe nirgends, auch ohne Fehler */}
+          <Interrupts />
         </div>
       );
     },
@@ -116,6 +124,25 @@ export const { useAppChat } = createChatHook({
 
       return <p className="chat-note">📝 Formular geöffnet</p>;
     },
+    antwortSenden: ({ part }) => {
+      if (!part.output?.antwortId) {
+        return null;
+      }
+
+      return (
+        <AntwortGesendetCard
+          eintragId={part.output.eintragId}
+          antwortId={part.output.antwortId}
+        />
+      );
+    },
+  },
+  interruptsComponents: {
+    // 🕵️‍♂️ Zeigen: die Freigabe hängt am Tool, nicht an der Nachricht
+    tools: {
+      antwortSenden: AntwortFreigabe,
+    },
+    generic: {},
   },
 });
 
@@ -129,7 +156,8 @@ function AntwortFreigabe({ interrupt }: AntwortFreigabeProps) {
       eintragId={interrupt.originalArgs.eintragId}
       text={interrupt.originalArgs.text}
       disabled={interrupt.status === "submitting"}
-      // todo: Veröffentlichen und Ablehnen
+      onApprove={() => interrupt.resolveInterrupt(true)}
+      onReject={() => interrupt.resolveInterrupt(false)}
     />
   );
 }
