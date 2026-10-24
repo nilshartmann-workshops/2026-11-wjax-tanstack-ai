@@ -4,7 +4,7 @@
 export const enableAssistant = true;
 
 /** Zeigt links unten den Knopf der Devtools von TanStack AI. */
-export const enableAiDevTools = false;
+export const enableAiDevTools = true;
 
 /** Zeigt links unten den Knopf der Devtools von TanStack Query. */
 export const enableQueryDevTools = false;
