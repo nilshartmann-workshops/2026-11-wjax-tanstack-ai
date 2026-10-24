@@ -1,4 +1,5 @@
 import { ChatEingabe } from "#/components/chat/ChatEingabe";
+import { useAppChat } from "#/components/chat/huetly-chat";
 
 type ChatPanelProps = {
   onClose: () => void;
@@ -6,10 +7,12 @@ type ChatPanelProps = {
 
 /** Das Panel des Assistenten: Kopfzeile, Nachrichtenliste und Eingabe. */
 export function ChatPanel({ onClose }: ChatPanelProps) {
-  // todo: Chat aus huetly-chat.tsx holen
+  // 🕵️‍♂️ Erzählen: unter der Haube useChat, es setzt die AG-UI-Events zu Nachrichten zusammen
+  // 🕵️‍♂️ Erzählen: eine feste threadId für das eine Gespräch im Panel
+  const chat = useAppChat({ threadId: "huetly-assistent" });
 
   function send(text: string) {
-    // todo: Nachricht an den Assistenten schicken
+    void chat.sendMessage(text);
   }
 
   return (
@@ -33,7 +36,7 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
           antworten.
         </p>
 
-        {/* todo: Nachrichten */}
+        <chat.AppChat />
       </div>
     </aside>
   );

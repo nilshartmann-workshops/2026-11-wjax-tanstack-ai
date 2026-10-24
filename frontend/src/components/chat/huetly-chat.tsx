@@ -3,7 +3,10 @@ import type { ToolApprovalInterrupt } from "@tanstack/ai-client";
 import { fetchServerSentEvents } from "@tanstack/ai-react";
 import { createChatHook } from "@tanstack/ai-react/ui";
 
+import { AssistantMessage } from "#/components/chat/AssistantMessage";
 import { FreigabeCard } from "#/components/chat/FreigabeCard";
+import { UserMessage } from "#/components/chat/UserMessage";
+import Markdown from "#/components/Markdown";
 
 /**
  * Alles, was TanStack AI über den Chat von hütly wissen muss: die Verbindung
@@ -24,13 +27,31 @@ export const { useAppChat } = createChatHook({
         </div>
       );
     },
-    message: ({ Parts }) => {
-      // todo: Blase für Nutzer, ChatTurn für Assistent
-      return <Parts />;
+    message: ({ message, Parts }) => {
+      // 🕵️‍♂️ Erzählen: die Chat-Route im Server, sie liefert AG-UI-Events als Server-Sent Events
+      console.log("Message", message);
+
+      if (message.role === "user") {
+        return (
+          <UserMessage>
+            <Parts />
+          </UserMessage>
+        );
+      }
+
+      return (
+        <AssistantMessage>
+          <Parts />
+        </AssistantMessage>
+      );
     },
   },
   partsComponents: {
-    // todo: Text
+    // 🕵️‍♂️ Zeigen: eine Nachricht ist kein String, sondern eine Liste von parts, je Art eine Komponente
+    text: ({ part }) => {
+      console.log("Part", part);
+      return <Markdown className="chat-text" content={part.content} />;
+    },
     thinking: () => {
       // todo: Denktext
       return null;
