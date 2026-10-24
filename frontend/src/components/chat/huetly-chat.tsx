@@ -1,9 +1,13 @@
-import type { antwortSendenToolDef } from "@huetly/shared/tool-definitions";
+import {
+  type antwortSendenToolDef,
+  gesucheSuchenToolDef,
+} from "@huetly/shared/tool-definitions";
 import type { ToolApprovalInterrupt } from "@tanstack/ai-client";
 import { fetchServerSentEvents } from "@tanstack/ai-react";
 import { createChatHook } from "@tanstack/ai-react/ui";
 
 import { AssistantMessage } from "#/components/chat/AssistantMessage";
+import { ChatGesuchCard } from "#/components/chat/ChatGesuchCard";
 import { FreigabeCard } from "#/components/chat/FreigabeCard";
 import { UserMessage } from "#/components/chat/UserMessage";
 import Markdown from "#/components/Markdown";
@@ -15,6 +19,8 @@ import Markdown from "#/components/Markdown";
  */
 const chatOptions = {
   connection: fetchServerSentEvents("/api/chat"),
+  // 🕵️‍♂️ Erzählen: nur die Definitionen, ausgeführt wird auf dem Server; sie typisieren part.output
+  tools: [gesucheSuchenToolDef],
 };
 
 export const { useAppChat } = createChatHook({
@@ -67,6 +73,19 @@ export const { useAppChat } = createChatHook({
     },
     fallback: ({ part }) => {
       return <p className="chat-note">Unbekannter Part: {part.type}</p>;
+    },
+  },
+  // 🕵️‍♂️ Zeigen: je Tool eine Komponente, fehlt eine, meckert der Compiler
+  toolsComponents: {
+    gesucheSuchen: ({ part }) => {
+      // 🕵️‍♂️ Zeigen: aus dem Ergebnis kommt nur die Id, die Karte ist die der Pinnwand
+      return (
+        <div className="chat-cards">
+          {part.output?.map((gesuch) => (
+            <ChatGesuchCard key={gesuch.id} gesuchId={gesuch.id} />
+          ))}
+        </div>
+      );
     },
   },
 });

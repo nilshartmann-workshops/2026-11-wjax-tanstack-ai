@@ -18,4 +18,15 @@ export const gesucheSuchenToolDef = toolDefinition({
   description:
     "Sucht Gesuche. In einem Gesuch braucht jemand Betreuung für sein Tier oder seine Pflanze.",
   inputSchema: suchFilter,
+  // 🕵️‍♂️ Zeigen: outputSchema typisiert part.output im Browser
+  outputSchema: z.array(
+    z.object({
+      id: z.string(),
+      titel: z.string(),
+      tier: z.string(),
+      tierart,
+      zeitraum: z.string(),
+      ort: z.string(),
+    }),
+  ),
 });
