@@ -13,4 +13,6 @@ export const chatOptions = createChatOptions({
   systemPrompts: [SYSTEM_PROMPT],
   // Schreibt jeden AG-UI-Event ins Terminal
   middleware: logEvents,
+  // 🕵️‍♂️ Zeigen: summary schickt den Denktext mit, sonst kommt er bei Claude leer an
+  reasoning: { level: "high", summary: true },
 });

@@ -52,9 +52,18 @@ export const { useAppChat } = createChatHook({
       console.log("Part", part);
       return <Markdown className="chat-text" content={part.content} />;
     },
-    thinking: () => {
-      // todo: Denktext
-      return null;
+    thinking: ({ part }) => {
+      if (part.content === "") {
+        return null;
+      }
+
+      // 🕵️‍♂️ Erzählen: Claude schickt eine Zusammenfassung der Gedanken, in Schüben und vor der Antwort
+      return (
+        <details className="chat-thinking" open>
+          <summary>Gedanken des Assistenten</summary>
+          {part.content}
+        </details>
+      );
     },
     fallback: ({ part }) => {
       return <p className="chat-note">Unbekannter Part: {part.type}</p>;
