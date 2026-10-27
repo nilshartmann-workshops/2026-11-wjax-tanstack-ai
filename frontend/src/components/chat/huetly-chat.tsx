@@ -6,7 +6,7 @@ import {
 } from "@huetly/shared/tool-definitions";
 import type { ToolApprovalInterrupt } from "@tanstack/ai-client";
 import { fetchServerSentEvents } from "@tanstack/ai-react";
-import { createChatHook } from "@tanstack/ai-react/ui";
+import { createChatHook, type ToolProps } from "@tanstack/ai-react/ui";
 
 import { AntwortGesendetCard } from "#/components/chat/AntwortGesendetCard";
 import { AssistantMessage } from "#/components/chat/AssistantMessage";
@@ -42,7 +42,7 @@ const chatOptions = {
   ],
 };
 
-export const { useAppChat } = createChatHook({
+export const { useAppChat, useChatContext } = createChatHook({
   options: chatOptions,
   components: {
     layout: ({ Messages, Interrupts }) => {
@@ -99,6 +99,10 @@ export const { useAppChat } = createChatHook({
   // 🕵️‍♂️ Zeigen: je Tool eine Komponente, fehlt eine, meckert der Compiler
   toolsComponents: {
     gesucheSuchen: ({ part }) => {
+      if (part.state !== "complete") {
+        return <ToolLaeuft part={part} />;
+      }
+
       // 🕵️‍♂️ Zeigen: aus dem Ergebnis kommt nur die Id, die Karte ist die der Pinnwand
       return (
         <div className="chat-cards">
@@ -109,6 +113,10 @@ export const { useAppChat } = createChatHook({
       );
     },
     angeboteSuchen: ({ part }) => {
+      if (part.state !== "complete") {
+        return <ToolLaeuft part={part} />;
+      }
+
       return (
         <div className="chat-cards">
           {part.output?.map((angebot) => (
@@ -159,5 +167,27 @@ function AntwortFreigabe({ interrupt }: AntwortFreigabeProps) {
       onApprove={() => interrupt.resolveInterrupt(true)}
       onReject={() => interrupt.resolveInterrupt(false)}
     />
+  );
+}
+
+type ToolLaeuftProps = ToolProps<typeof chatOptions>;
+
+function ToolLaeuft({ part }: ToolLaeuftProps) {
+  // 🕵️‍♂️ Erzählen: die Komponenten bekommen den Chat nicht als Prop, sondern aus dem Kontext
+  const chat = useChatContext();
+
+  // 🕵️‍♂️ Fallstrick: nach stop() bleibt der Part unfertig stehen, deshalb nur im laufenden Lauf
+  if (!chat.isLoading) {
+    return null;
+  }
+
+  // 🕵️‍♂️ Erzählen: ein ehrlicher Ladezustand statt eines Spinners
+  return (
+    <div className="chat-tool">
+      <span className="chat-tool-label">
+        ⏳ {part.name} ({part.state})
+      </span>
+      <code className="chat-tool-args">{part.arguments}</code>
+    </div>
   );
 }
